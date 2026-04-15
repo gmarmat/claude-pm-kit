@@ -92,27 +92,51 @@ Explain each question briefly so the user understands what you're looking for an
    - "Any automation needs? Scheduled jobs, pipelines, background processing?" — *catches operational complexity early*
    - "What's the content workflow? Who creates content, how does it get published?" — *surfaces production pipelines*
 
-3. After the interview (2-3 rounds), explain what happens next:
-   ```
-   Great — I have enough context. Now I'm going to do what a PM does
-   before greenlighting a project:
+3. **Classify intent from the answers.** This determines what research to run:
 
-   Checking market size, competitors, and pricing benchmarks.
-   I'll show you what I find — correct anything that's off.
+   | Intent | Signals from Interview | Research Approach |
+   |--------|----------------------|-------------------|
+   | **Commercial** (SaaS, marketplace, paid app) | "make money", "subscription", "customers", "users" | Full: TAM/SAM/SOM, competitors with real numbers, pricing benchmarks, GTM, unit economics |
+   | **Personal/private tool** | "just for me", "my team", "internal", "2-3 users" | Light: similar tools for inspiration, stack cost optimization, feature prioritization. Skip market sizing. |
+   | **Open source / community** | "free", "open source", "community", "share with others" | Moderate: existing alternatives, adoption patterns, community fit, hosting costs |
+   | **Internal business tool** | "for my company", "our team needs", "replace spreadsheet" | Moderate: build vs buy analysis, existing tools, ROI justification, integration needs |
+
+   Tell the user what you detected:
+   ```
+   Based on what you described, this sounds like a [intent type].
+   That changes what I research — [1 sentence on what you'll focus on].
    ```
 
-   Then run web research:
+4. Run research **based on intent:**
+
+   **If Commercial:**
    - WebSearch: `"[domain] market size TAM 2025 2026"`
-   - WebSearch: `"[domain] competitors alternatives"`
-   - WebSearch: `"[domain] pricing models benchmarks"`
+   - WebSearch: `"[domain] competitors alternatives"` — require real numbers (downloads, revenue, pricing). If search returns vague data, search deeper: `"[competitor name] users revenue funding"`
+   - WebSearch: `"[domain] pricing models benchmarks"` — anchor to specific products, not generic ranges
+   - For SAM/SOM: show your math. `TAM ($X) × segment filter (Y%) × geographic filter (Z%) = SAM ($N)`
 
-4. Present research as findings (narrate, don't teach), then the Go/No-Go:
+   **If Personal/private tool:**
+   - WebSearch: `"[domain] tools apps for [use case]"` — find similar tools for feature inspiration
+   - WebSearch: `"[stack] hosting cost free tier comparison 2026"` — optimize for low/zero cost
+   - Skip TAM/SAM/SOM — not relevant. Focus on: "here are 3-5 tools that solve similar problems, here's what they do well, here's what you can borrow."
+
+   **If Open source / community:**
+   - WebSearch: `"[domain] open source alternatives"` — find existing projects
+   - WebSearch: `"[domain] [tool type] github stars"` — gauge community interest
+   - Focus on: what exists, where's the gap, what would make people adopt yours
+
+   **If Internal business tool:**
+   - WebSearch: `"[domain] [tool type] enterprise SaaS"` — build vs buy comparison
+   - Focus on: what does buying cost, what does building save, integration points
+
+5. Present research as findings, then the Go/No-Go:
+
+   **For Commercial intent:**
    ```
-   MARKET: [summary + number + source]
-   COMPETITORS: [table — name, pricing, strength, weakness]
-   PRICING: [benchmarks from similar products]
-
-   Based on this, here's how your idea scores:
+   MARKET: [size + growth + source — show SAM/SOM math]
+   COMPETITORS: [table with REAL numbers — no "Growing" or "Large" allowed.
+                 If data not found, state "data not found" honestly.]
+   PRICING: [anchored to specific products: "X charges $Y, Z charges $W"]
 
    | Factor            | Score | Notes                           |
    |-------------------|-------|---------------------------------|
@@ -123,19 +147,42 @@ Explain each question briefly so the user understands what you're looking for an
    | Feasibility       | X/10  | [stack estimate]                |
    | Business model    | X/10  | [from interview + benchmarks]   |
    | **Overall**       | **X/10** | **GO / NO-GO / PIVOT**       |
-
-   [1-2 sentences: what's strong, what to watch out for]
    ```
 
-   **Tone:** You're a peer sharing findings, not a professor grading homework.
-   State facts, flag risks, recommend — then let the user decide.
+   **For Personal/private tool:**
+   ```
+   SIMILAR TOOLS: [table — what exists, what it does, what you can learn from it]
+   COST ESTIMATE: [monthly infra cost for your stack]
+   FEATURE IDEAS: [borrowed from similar tools, adapted for your use case]
 
-5. **GATE:** User must say GO before proceeding to planning.
+   | Factor            | Score | Notes                           |
+   |-------------------|-------|---------------------------------|
+   | Problem clarity   | X/10  | [is the need real?]             |
+   | Existing tools    | X/10  | [could you just use one of these?] |
+   | Feasibility       | X/10  | [can you build this?]           |
+   | Cost to run       | X/10  | [monthly operational cost]      |
+   | **Overall**       | **X/10** | **GO / USE EXISTING / SIMPLIFY** |
+   ```
+
+   **For all intents:** After Go/No-Go, recommend:
+   ```
+   Before building, consider talking to [N] [target users] about [specific question].
+   Even a 10-minute conversation can save weeks of building the wrong thing.
+   ```
+
+   **Tone:** Peer sharing findings. State facts, flag risks, recommend. Let the user decide.
+   **Data quality rules:**
+   - Never present vague competitor data ("Growing", "Large") — get real numbers or say "data not found"
+   - Tag every data point: [Verified] (multiple sources), [Estimated] (single source), [Unsourced] (no source)
+   - When two sources disagree, note both values and which you used
+   - Show SAM/SOM methodology, not just numbers
+
+6. **GATE:** User must say GO before proceeding to planning.
    - If GO → save discovery to `docs/toolkit/discovery.md`, proceed to PRD creation
    - If NO-GO → help user pivot or refine, loop back to interview
    - If PIVOT → adjust the idea, re-research
 
-6. Generate PRD pre-filled from discovery research. Brief intro:
+7. Generate PRD pre-filled from discovery research. Brief intro:
    ```
    Here's your PRD — pre-filled from our research.
    This is what Claude reads to know what to build. Review it and
