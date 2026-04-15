@@ -107,89 +107,29 @@ Explain each question briefly so the user understands what you're looking for an
    That changes what I research — [1 sentence on what you'll focus on].
    ```
 
-4. Run research **based on intent:**
+4. Run research **based on intent** (2-3 WebSearches per intent):
 
-   **If Commercial:**
-   - WebSearch: `"[domain] market size TAM 2025 2026"`
-   - WebSearch: `"[domain] competitors alternatives"` — require real numbers (downloads, revenue, pricing). If search returns vague data, search deeper: `"[competitor name] users revenue funding"`
-   - WebSearch: `"[domain] pricing models benchmarks"` — anchor to specific products, not generic ranges
-   - For SAM/SOM: show your math. `TAM ($X) × segment filter (Y%) × geographic filter (Z%) = SAM ($N)`
+   | Intent | Searches | Focus |
+   |--------|----------|-------|
+   | Commercial | market size TAM, competitors + real numbers, pricing benchmarks | SAM/SOM with shown math, competitor table with downloads/revenue/pricing (no "Growing" allowed — get numbers or say "data not found") |
+   | Personal | similar tools for [use case], hosting cost comparison | Skip TAM. 3-5 tools for inspiration + monthly cost estimate |
+   | Open source | open source alternatives, github stars | What exists, where's the gap, adoption potential |
+   | Internal | enterprise SaaS comparison | Build vs buy cost, integration points |
 
-   **If Personal/private tool:**
-   - WebSearch: `"[domain] tools apps for [use case]"` — find similar tools for feature inspiration
-   - WebSearch: `"[stack] hosting cost free tier comparison 2026"` — optimize for low/zero cost
-   - Skip TAM/SAM/SOM — not relevant. Focus on: "here are 3-5 tools that solve similar problems, here's what they do well, here's what you can borrow."
+5. Present findings + Go/No-Go scorecard. Score 4-6 factors /10 based on intent:
 
-   **If Open source / community:**
-   - WebSearch: `"[domain] open source alternatives"` — find existing projects
-   - WebSearch: `"[domain] [tool type] github stars"` — gauge community interest
-   - Focus on: what exists, where's the gap, what would make people adopt yours
+   - **Commercial:** Problem clarity, Market size, Competition, Differentiation, Feasibility, Business model → GO / NO-GO / PIVOT
+   - **Personal:** Problem clarity, Existing tools, Feasibility, Cost to run → GO / USE EXISTING / SIMPLIFY
+   - **OSS/Internal:** Adapt factors to fit. Always score honestly.
 
-   **If Internal business tool:**
-   - WebSearch: `"[domain] [tool type] enterprise SaaS"` — build vs buy comparison
-   - Focus on: what does buying cost, what does building save, integration points
+   After every scorecard: *"Before building, consider talking to [N] [target users] about [specific question]."*
 
-5. Present research as findings, then the Go/No-Go:
+   **Data quality rules:** No vague data. Tag everything [Verified]/[Estimated]/[Unsourced]. Show SAM/SOM math. Cross-reference disagreements.
 
-   **For Commercial intent:**
-   ```
-   MARKET: [size + growth + source — show SAM/SOM math]
-   COMPETITORS: [table with REAL numbers — no "Growing" or "Large" allowed.
-                 If data not found, state "data not found" honestly.]
-   PRICING: [anchored to specific products: "X charges $Y, Z charges $W"]
+6. **GATE:** User says GO → save to `docs/toolkit/discovery.md`, proceed to PRD.
+   NO-GO → pivot/refine. PIVOT → re-research.
 
-   | Factor            | Score | Notes                           |
-   |-------------------|-------|---------------------------------|
-   | Problem clarity   | X/10  | [evidence from interview]       |
-   | Market size       | X/10  | [from web research]             |
-   | Competition       | X/10  | [from web research]             |
-   | Differentiation   | X/10  | [from interview]                |
-   | Feasibility       | X/10  | [stack estimate]                |
-   | Business model    | X/10  | [from interview + benchmarks]   |
-   | **Overall**       | **X/10** | **GO / NO-GO / PIVOT**       |
-   ```
-
-   **For Personal/private tool:**
-   ```
-   SIMILAR TOOLS: [table — what exists, what it does, what you can learn from it]
-   COST ESTIMATE: [monthly infra cost for your stack]
-   FEATURE IDEAS: [borrowed from similar tools, adapted for your use case]
-
-   | Factor            | Score | Notes                           |
-   |-------------------|-------|---------------------------------|
-   | Problem clarity   | X/10  | [is the need real?]             |
-   | Existing tools    | X/10  | [could you just use one of these?] |
-   | Feasibility       | X/10  | [can you build this?]           |
-   | Cost to run       | X/10  | [monthly operational cost]      |
-   | **Overall**       | **X/10** | **GO / USE EXISTING / SIMPLIFY** |
-   ```
-
-   **For all intents:** After Go/No-Go, recommend:
-   ```
-   Before building, consider talking to [N] [target users] about [specific question].
-   Even a 10-minute conversation can save weeks of building the wrong thing.
-   ```
-
-   **Tone:** Peer sharing findings. State facts, flag risks, recommend. Let the user decide.
-   **Data quality rules:**
-   - Never present vague competitor data ("Growing", "Large") — get real numbers or say "data not found"
-   - Tag every data point: [Verified] (multiple sources), [Estimated] (single source), [Unsourced] (no source)
-   - When two sources disagree, note both values and which you used
-   - Show SAM/SOM methodology, not just numbers
-
-6. **GATE:** User must say GO before proceeding to planning.
-   - If GO → save discovery to `docs/toolkit/discovery.md`, proceed to PRD creation
-   - If NO-GO → help user pivot or refine, loop back to interview
-   - If PIVOT → adjust the idea, re-research
-
-7. Generate PRD pre-filled from discovery research. Brief intro:
-   ```
-   Here's your PRD — pre-filled from our research.
-   This is what Claude reads to know what to build. Review it and
-   let me know what to change.
-   ```
-
-   Save to `docs/PRD.md`
+7. Generate PRD pre-filled from research (not blank template). Save to `docs/PRD.md`.
 
 **State B: Has idea/PRD but no code**
 ```
@@ -230,53 +170,28 @@ Your project is well set up. Current status:
 
 ## `/pm status` — Product Maturity Scorecard
 
-Read all artifacts and score each lifecycle phase:
+Check for artifacts and score each lifecycle phase as a progress bar (0-100%):
 
-```
-Product Maturity: [Product Name]
+| Phase | What to Check | Scoring |
+|-------|-------------|---------|
+| Discovery | PRD (30%), market research (40%), Go/No-Go (30%) | Check docs/PRD.md, docs/toolkit/discovery.md |
+| Planning | arch.md (30%), skills (20%), roadmap (25%), env setup (25%) | Check docs/arch.md, .claude/skills/, docs/toolkit/roadmap.md |
+| Development | % of P0 features marked "done" in arch.md feature index | Count done vs total P0 |
+| Productization | Intelligence Hub (40%), T1 features (30%), pre-launch checklist (30%) | Check docs/toolkit/index.html, admin routes |
+| Launch | Deployed (50%), domain (20%), smoke test (30%) | Check deployment status |
+| Growth | Metrics (25%), stakeholder update (25%), roadmap refresh (25%), research refresh (25%) | Check docs/toolkit/metrics.yaml, updates/ |
 
-  Discovery:        ██████████ 100%  docs/toolkit/discovery.md exists, Go/No-Go done
-  Planning:         ████████░░  80%  PRD ✓, arch.md ✓, roadmap missing
-  Development:      ██████░░░░  60%  6/10 P0 features built
-  Productization:   ██░░░░░░░░  20%  Intelligence Hub exists, no feature tiers
-  Launch:           ░░░░░░░░░░   0%  Not deployed
-  Growth:           ░░░░░░░░░░   0%  No metrics, no stakeholder updates
-
-  Overall: 43% — Mid-build. Focus on finishing P0, then productize.
-```
-
-**Scoring rules:**
-- Discovery: PRD exists (30%), market research exists (40%), Go/No-Go done (30%)
-- Planning: arch.md exists (30%), skills customized (20%), roadmap exists (25%), environment set up (25%)
-- Development: % of P0 features with status "done" in arch.md feature index
-- Productization: Intelligence Hub exists (40%), T1 features scaffolded (30%), pre-launch checklist (30%)
-- Launch: Deployed (50%), domain configured (20%), smoke test passed (30%)
-- Growth: Metrics defined (25%), stakeholder update sent (25%), roadmap updated (25%), research refreshed (25%)
+Present as progress bars with 1-line status per phase. End with overall % and recommended focus.
 
 ---
 
 ## `/pm next` — Highest-Impact Next Action
 
-Based on the maturity scorecard, recommend ONE action:
+Recommend ONE action based on the first gap found (check in this order):
 
-**Priority logic:**
-1. If no PRD → "Write your PRD first. Describe your product and I'll help."
-2. If no market research → "Run `/toolkit research` — understand your market before building more."
-3. If P0 features incomplete → "Finish P0 Feature [X] — it's the next item on the roadmap."
-4. If no Intelligence Hub → "Run `/toolkit research` — you need business intelligence before launch."
-5. If no T1 infrastructure → "Run `/toolkit features t1` — add KPIs, settings, and audit log."
-6. If not deployed → "Time to launch. Run `/pm setup` to check deployment readiness."
-7. If deployed but no metrics → "Run `/metrics define` — start measuring what matters."
-8. If everything done → "Your product is mature. Consider: refresh competitive research, plan next phase, or run `/userstudy`."
+1. No PRD → write it. 2. No research → `/toolkit research`. 3. P0 incomplete → next feature. 4. No Intelligence Hub → `/toolkit research`. 5. No T1 → `/toolkit features t1`. 6. Not deployed → launch. 7. No metrics → `/metrics define`. 8. All done → refresh research or `/userstudy`.
 
-Present as:
-```
-Next action: [action]
-
-Why: [1 sentence explaining impact]
-Command: [exact command to run]
-Time: [estimated minutes]
-```
+Format: `Next action: [X] | Why: [1 sentence] | Command: [/cmd] | Time: [N min]`
 
 ---
 
