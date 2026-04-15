@@ -1,6 +1,6 @@
 # Claude PM Kit — Architecture
 
-**Version:** 0.1 | **Updated:** 2026-04-14
+**Version:** 0.2 | **Updated:** 2026-04-15
 
 > **LLM Instructions:** Token-optimized project index. Tables over prose, self-contained sections.
 
@@ -87,6 +87,7 @@ claude-pm-kit/
 4. **Kit delegation** — PM Twin checks for other kits, delegates when available, works alone when not
 5. **Confidence tagging** — Every data point tagged: Verified, Estimated, Calculated, User-Provided
 6. **`[PM Twin]` prefix** — All skill descriptions start with `[PM Twin]` for disambiguation
+7. **Peer narration tone** — PM Twin narrates its work ("Checking competitors...") rather than teaching PM theory. User absorbs product thinking by watching, not being lectured.
 
 ---
 
@@ -110,3 +111,4 @@ claude-pm-kit/
 | Ver | Date | Changes |
 |-----|------|---------|
 | 0.1 | 2026-04-14 | **Initial scaffold.** 7 skills planned. PRD drafted. Ecosystem designed. |
+| 0.2 | 2026-04-15 | **QA + e2e hardening.** Fixed 3 blockers (LICENSE, .gitignore, docs/toolkit/). Discovery interview improved: 4 new clarifying questions (public/private, AI role, automation, content workflow). Tone refined to peer narration. E2e trial against DharmaLink scored 7.5/10 — stack exact match, missed AI-first architecture. Quickstart simplified to 3 steps. |
