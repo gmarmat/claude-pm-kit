@@ -132,6 +132,26 @@ Each kit works independently. The PM Twin can orchestrate all of them when avail
 
 ---
 
+## Security & Safety
+
+| Principle | How It's Enforced |
+|-----------|------------------|
+| **No secrets accessed** | PM Twin never reads `.env` files — only `.env.example` for structure |
+| **Generated code is secure** | `/toolkit features` requires auth, RLS, input validation, RBAC on every generated route and table |
+| **Untrusted web content** | All market research treated as untrusted — never execute code from search results |
+| **User review gate** | Generated application code is always presented for approval before writing to project |
+| **Data confidence tags** | Every research claim tagged [Verified], [Estimated], or [Unsourced] — no false authority |
+| **Discovery data protected** | `docs/toolkit/` output is gitignored — sensitive business intelligence stays local |
+| **No destructive commands** | NEVER runs `rm -rf`, `DROP TABLE`, or `git push --force` |
+
+**What this kit does NOT do:**
+- Auto-deploy code without user approval
+- Store or transmit your business data externally
+- Make unverified market claims without tagging confidence
+- Execute code found in web search results
+
+---
+
 ## Requirements
 
 - [Claude Code](https://claude.ai/claude-code) (CLI)
