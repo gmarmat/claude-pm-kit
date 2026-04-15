@@ -48,12 +48,12 @@ These skills are copied into the user's project `.claude/skills/` — they don't
 
 ## Kit Ecosystem
 
-| Kit | Role | Relationship |
-|-----|------|-------------|
-| project-kit | Scaffolding engine | PM Twin delegates to it for project setup |
-| workspace-kit | Workspace engine | PM Twin delegates for multi-project organization |
-| project-rehab | Diagnostic engine | PM Twin delegates for existing project health checks |
-| **pm-kit** | **Orchestrator** | **Uses all the above as tools** |
+| Kit | Repo | Role |
+|-----|------|------|
+| project-kit | `github.com/gmarmat/claude-project-kit` | Scaffolding engine — PM Twin delegates for project setup |
+| workspace-kit | `github.com/gmarmat/claude-workspace-kit` | Workspace engine — PM Twin delegates for multi-project organization |
+| project-rehab | `github.com/gmarmat/claude-project-rehab` | Diagnostic engine — PM Twin delegates for health checks |
+| **pm-kit** | `github.com/gmarmat/claude-pm-kit` | **Orchestrator — uses all the above as tools** |
 
 Each kit works independently. PM Twin adds an orchestration layer on top.
 
