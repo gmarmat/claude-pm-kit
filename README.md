@@ -72,23 +72,18 @@ A set of Claude Code skills that act as a PM Twin — guiding you through the fu
 ### Option A: Start fresh with PM Twin (recommended)
 
 ```bash
-# 1. Clone the PM kit
+# 1. Clone and set up
 git clone https://github.com/gmarmat/claude-pm-kit.git
+mkdir -p my-product/.claude && cp -r claude-pm-kit/.claude/skills my-product/.claude/skills
 
-# 2. Create your project folder
-mkdir my-product && cd my-product
-mkdir -p .claude/skills docs/toolkit
+# 2. Launch Claude Code in your project
+cd my-product && claude
 
-# 3. Copy PM Twin skills into your project
-cp -r ../claude-pm-kit/.claude/skills/* .claude/skills/
-
-# 4. Launch Claude Code
-claude
+# 3. Tell Claude your idea
+> /pm setup — I want to build [your idea]
 ```
 
-Tell Claude: **"Run `/pm setup` — I want to build [your idea]"**
-
-The PM Twin will interview you, research the market, and guide you through the full lifecycle. It will create `docs/PRD.md`, `docs/arch.md`, and other files as you go.
+The PM Twin will interview you, research the market, and guide you through the full lifecycle. It creates `docs/PRD.md`, `docs/arch.md`, `docs/toolkit/`, and other files as you go.
 
 ### Option B: Add to existing project
 
