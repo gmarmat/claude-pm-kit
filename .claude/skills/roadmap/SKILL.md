@@ -54,8 +54,16 @@ When run with `update`:
 4. Flag features that slipped or changed scope
 5. Present diff to user for confirmation
 
+## Prerequisites
+
+Check before running:
+- `docs/PRD.md` must exist — if missing: "Run `/pm setup` to create your PRD first."
+- `docs/arch.md` should exist for feature index — if missing, build from PRD phases only
+
 ## Important Rules
 
 - **Reflect reality** — roadmap matches PRD + arch.md, not wishful thinking
 - **Flag slippage** — if features are behind, say so clearly
 - **Keep it current** — suggest running after each sprint/milestone
+- **Check existing first** — read `docs/toolkit/roadmap.md` before generating. Update it, don't recreate from scratch.
+- **Write only to docs/toolkit/** — never modify application code

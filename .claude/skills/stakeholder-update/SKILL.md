@@ -74,3 +74,6 @@ Save to `docs/toolkit/updates/YYYY-MM-DD-[period].md`
 - **Git log is the source of truth** — features shipped = commits merged
 - **Flag slippage honestly** — if something slipped, say so with context
 - **Keep it short** — stakeholders scan, they don't read. Tables over paragraphs.
+- **No sensitive data in updates** — don't include API keys, user PII, or internal URLs in shareable updates
+- **Write only to docs/toolkit/updates/** — never modify application code
+- **Check existing updates** — read previous updates before generating to avoid repeating old news

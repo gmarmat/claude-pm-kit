@@ -68,5 +68,8 @@ Before generating any pitch materials, verify these exist:
 ## Important Rules
 
 - **Never fabricate traction** — only reference real data (git history, actual metrics)
-- **Cite Intelligence Hub** — all market/competitive claims reference the Hub
+- **Cite Intelligence Hub** — all market/competitive claims reference the Hub with confidence tags
 - **Speaker notes are key** — the outline is for slides, the notes are for the presenter
+- **Mark as confidential** — generated pitch materials may contain sensitive business intelligence. Add header: "CONFIDENTIAL — do not commit to public repos"
+- **Write only to docs/toolkit/** — never modify application code
+- **Check existing first** — read previous pitch docs before generating to avoid contradicting earlier versions

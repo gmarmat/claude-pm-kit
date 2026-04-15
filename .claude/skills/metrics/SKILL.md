@@ -72,3 +72,6 @@ Generate a formatted report for stakeholders:
 - **Metrics must be measurable** — if it can't be queried, it's not a metric
 - **Fewer is better** — 3-7 metrics, not 20. Focus on what drives decisions.
 - **Connect to T2 monitoring** — if /toolkit features T2 is scaffolded, connect metrics to real data
+- **Check existing first** — read `docs/toolkit/metrics.yaml` before defining. Don't overwrite existing definitions.
+- **Write only to docs/toolkit/** — never modify application code
+- **SQL queries are reference only** — tag them: "These are reference queries, not production code. Parameterize before executing."
