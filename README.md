@@ -130,7 +130,7 @@ your-project/
 |-----|---------|------|
 | [claude-project-kit](https://github.com/gmarmat/claude-project-kit) | Bootstrap new projects | Day 0 |
 | [claude-workspace-kit](https://github.com/gmarmat/claude-workspace-kit) | Manage multiple projects | Day 0 |
-| [claude-project-rehab](https://github.com/gmarmat/claude-project-rehab) | Fix existing projects | Anytime |
+| [claude-project-rehab](https://github.com/gmarmat/claude-project-rehab) | Assess + upgrade **existing** projects, guide **new** ideas | Anytime |
 | **claude-pm-kit** | **Product management** | **Idea → Launch → Growth** |
 
 Each kit works independently. The PM Twin can orchestrate all of them when available.

@@ -42,9 +42,8 @@ claude-pm-kit/
 │   ├── features/                          # Feature deep-dives
 │   ├── plans/                             # Research + decisions
 │   └── meta/                              # Ecosystem docs, persona definition
-└── templates/
-    ├── toolkit-base.css                   # Minimal CSS for HTML output
-    └── calculator.js                      # Reusable pricing calculator logic
+└── templates/                              # Planned — CSS + JS for HTML output
+    └── (toolkit-base.css, calculator.js — created when /toolkit research is built)
 ```
 
 ---
