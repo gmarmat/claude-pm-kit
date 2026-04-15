@@ -43,6 +43,12 @@ metrics:
 
 ## `/metrics review`
 
+**First:** Check if `docs/toolkit/metrics.yaml` exists. If not:
+```
+No metrics defined yet. Run /metrics define first to set up your KPIs.
+```
+**Stop if missing.** Do not proceed without metric definitions.
+
 Read `metrics.yaml`, check each metric against target, present status:
 
 ```

@@ -69,36 +69,58 @@ A set of Claude Code skills that act as a PM Twin — guiding you through the fu
 
 ## How to Use
 
-### Option A: Start with PM Twin (recommended)
-
-Copy the PM kit skills into your project:
+### Option A: Start fresh with PM Twin (recommended)
 
 ```bash
-# Copy all PM Twin skills
-cp -r claude-pm-kit/.claude/skills/pm your-project/.claude/skills/
-cp -r claude-pm-kit/.claude/skills/toolkit your-project/.claude/skills/
-cp -r claude-pm-kit/.claude/skills/roadmap your-project/.claude/skills/
-# ... (copy whichever skills you want)
+# 1. Clone the PM kit
+git clone https://github.com/gmarmat/claude-pm-kit.git
 
-# Launch Claude Code in your project
-cd your-project && claude
+# 2. Create your project folder
+mkdir my-product && cd my-product
+mkdir -p .claude/skills docs/toolkit
+
+# 3. Copy PM Twin skills into your project
+cp -r ../claude-pm-kit/.claude/skills/* .claude/skills/
+
+# 4. Launch Claude Code
+claude
 ```
 
-Tell Claude: "Run `/pm setup` — I want to build [your idea]"
+Tell Claude: **"Run `/pm setup` — I want to build [your idea]"**
+
+The PM Twin will interview you, research the market, and guide you through the full lifecycle. It will create `docs/PRD.md`, `docs/arch.md`, and other files as you go.
 
 ### Option B: Add to existing project
 
-If you already have a project built with [claude-project-kit](https://github.com/gmarmat/claude-project-kit):
+If you already have a project (built with [claude-project-kit](https://github.com/gmarmat/claude-project-kit) or on your own):
 
 ```bash
-# Copy PM skills into your existing project
-cp -r claude-pm-kit/.claude/skills/toolkit your-project/.claude/skills/
+# Copy the skills you want
 cp -r claude-pm-kit/.claude/skills/pm your-project/.claude/skills/
+cp -r claude-pm-kit/.claude/skills/toolkit your-project/.claude/skills/
 
 cd your-project && claude
 ```
 
-Run `/toolkit research` to generate your Intelligence Hub.
+- Have a PRD? → Run `/toolkit research` to generate your Intelligence Hub
+- No PRD yet? → Run `/pm setup` and it will guide you
+
+### What you need in your project
+
+The PM Twin skills read these files (and create them if missing):
+
+```
+your-project/
+├── .claude/skills/        ← PM Twin skills go here
+│   ├── pm/
+│   ├── toolkit/
+│   └── ...
+├── docs/
+│   ├── PRD.md             ← /pm setup creates this
+│   ├── arch.md            ← /pm setup creates this
+│   └── toolkit/           ← /toolkit research writes output here
+└── CLAUDE.md              ← optional but recommended
+```
 
 ---
 

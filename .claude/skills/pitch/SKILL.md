@@ -10,10 +10,21 @@ allowed-tools: Read, Glob, Grep, Write, WebSearch
 
 Generate pitch deck outlines and speaker notes from Intelligence Hub data.
 
-## Prerequisites
+## Prerequisites (Check Before Running)
 
-- `docs/toolkit/index.html` must exist (run `/toolkit research` first)
-- `docs/PRD.md` must exist
+Before generating any pitch materials, verify these exist:
+
+1. **Check** `docs/toolkit/index.html` — if missing, tell the user:
+   ```
+   Intelligence Hub not found. Run /toolkit research first — I need
+   market data, competitive analysis, and pricing to build pitch materials.
+   ```
+2. **Check** `docs/PRD.md` — if missing, tell the user:
+   ```
+   No PRD found. Run /pm setup to create one, or add your PRD at docs/PRD.md.
+   ```
+
+**Stop and show the message above if either prerequisite is missing.** Do not attempt to generate pitch materials without data.
 
 ## Audience Templates
 

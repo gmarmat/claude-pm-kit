@@ -57,18 +57,56 @@ Look for other Claude kits in these locations (in order):
 Based on assessment, classify and recommend:
 
 **State A: Fresh idea (no code, no docs)**
+
+Present the plan, then **immediately start the discovery interview** when the user confirms:
+
 ```
 You're starting from scratch. Here's the PM approach:
 
-  1. [15 min] Discovery — I'll interview you about the problem, then research the market
-  2. [5 min]  Go/No-Go — I'll present a scorecard. You decide if it's worth building.
-  3. [15 min] Plan — PRD (pre-filled from research), architecture, scaffold
+  1. [15 min] Discovery — I'll interview you, then research the market
+  2. [5 min]  Go/No-Go — Scorecard. You decide if it's worth building.
+  3. [15 min] Plan — PRD, architecture, scaffold
   4. [you]    Build — I'll advise on decisions, track progress
   5. [10 min] Productize — Intelligence Hub + production infrastructure
   6. [10 min] Launch — Deploy to your hosting provider
 
-  Start with step 1?
+  Ready? Let's start with discovery.
 ```
+
+**When user confirms, run the Discovery Interview:**
+
+1. Ask these questions (one at a time, conversationally — don't dump all at once):
+   - "What are you building? Describe it in 1-2 sentences."
+   - "Who specifically has this problem? (Be specific — not 'everyone')"
+   - "How do they solve it today? What's broken about that?"
+   - "Why would someone switch to yours? What's your edge?"
+   - "How did you discover this problem? (Lived experience? Observation? Data?)"
+   - "How would this make money? (Subscription, freemium, usage-based, ads, other?)"
+
+2. After the interview (2-3 rounds of conversation), run web research:
+   - WebSearch: `"[domain] market size TAM 2025 2026"`
+   - WebSearch: `"[domain] competitors alternatives"`
+   - WebSearch: `"[domain] pricing models benchmarks"`
+
+3. Present a Go/No-Go scorecard:
+   ```
+   | Factor            | Score | Notes                           |
+   |-------------------|-------|---------------------------------|
+   | Problem clarity   | X/10  | [evidence from interview]       |
+   | Market size       | X/10  | [from web research]             |
+   | Competition       | X/10  | [from web research]             |
+   | Differentiation   | X/10  | [from interview]                |
+   | Feasibility       | X/10  | [stack estimate]                |
+   | Business model    | X/10  | [from interview + benchmarks]   |
+   | **Overall**       | **X/10** | **GO / NO-GO / PIVOT**       |
+   ```
+
+4. **GATE:** User must say GO before proceeding to planning.
+   - If GO → save discovery to `docs/toolkit/discovery.md`, proceed to PRD creation
+   - If NO-GO → help user pivot or refine, loop back to interview
+   - If PIVOT → adjust the idea, re-research
+
+5. Create PRD pre-filled from discovery research (not a blank template), save to `docs/PRD.md`
 
 **State B: Has idea/PRD but no code**
 ```
