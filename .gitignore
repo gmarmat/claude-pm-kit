@@ -1,0 +1,27 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Generated toolkit output (user-specific, not shipped)
+docs/toolkit/index.html
+docs/toolkit/sources.md
+docs/toolkit/research-log.md
+docs/toolkit/discovery.md
+docs/toolkit/roadmap.md
+docs/toolkit/roadmap.html
+docs/toolkit/metrics.yaml
+docs/toolkit/metrics-report-*.md
+docs/toolkit/updates/
+docs/toolkit/research/
+docs/toolkit/pitch-*.md
