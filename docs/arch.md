@@ -1,6 +1,6 @@
 # Claude PM Kit — Architecture
 
-**Version:** 0.2 | **Updated:** 2026-04-15
+**Version:** 0.3 | **Updated:** 2026-04-15
 
 > **LLM Instructions:** Token-optimized project index. Tables over prose, self-contained sections.
 
@@ -111,4 +111,5 @@ claude-pm-kit/
 | Ver | Date | Changes |
 |-----|------|---------|
 | 0.1 | 2026-04-14 | **Initial scaffold.** 7 skills planned. PRD drafted. Ecosystem designed. |
-| 0.2 | 2026-04-15 | **QA + e2e hardening.** Fixed 3 blockers (LICENSE, .gitignore, docs/toolkit/). Discovery interview improved: 4 new clarifying questions (public/private, AI role, automation, content workflow). Tone refined to peer narration. E2e trial against DharmaLink scored 7.5/10 — stack exact match, missed AI-first architecture. Quickstart simplified to 3 steps. |
+| 0.2 | 2026-04-15 | **QA + e2e hardening.** Fixed 3 blockers. Discovery: 4 new questions, peer narration tone. E2e trial vs DharmaLink: 7.5/10. |
+| 0.3 | 2026-04-15 | **Security + token optimization.** Added ALWAYS/ASK/NEVER hard constraints to CLAUDE.md. toolkit features requires auth+RLS+validation+RBAC on all generated code. Untrusted web content rule added. Intent branching (commercial/personal/OSS/internal) in discovery. Quality audit: source verification 7/10, insight depth 6.5/10. pm/SKILL.md optimized 290→205 lines. Full repo URLs added to CLAUDE.md ecosystem table. |
