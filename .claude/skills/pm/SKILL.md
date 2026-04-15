@@ -58,24 +58,40 @@ Based on assessment, classify and recommend:
 
 **State A: Fresh idea (no code, no docs)**
 
-Present the plan, then **immediately start the discovery interview** when the user confirms:
+Present the plan with context on WHY each step matters, then start:
 
 ```
-You're starting from scratch. Here's the PM approach:
+You're starting from scratch. I'll walk you through the same process
+a product manager uses before any code gets written. Here's the plan:
 
-  1. [15 min] Discovery — I'll interview you, then research the market
-  2. [5 min]  Go/No-Go — Scorecard. You decide if it's worth building.
-  3. [15 min] Plan — PRD, architecture, scaffold
-  4. [you]    Build — I'll advise on decisions, track progress
-  5. [10 min] Productize — Intelligence Hub + production infrastructure
-  6. [10 min] Launch — Deploy to your hosting provider
+  1. [15 min] Discovery — I'll interview you about the idea, then research
+     the market. WHY: most apps fail because they solve a problem nobody
+     has, or solve it worse than existing options. Research first.
+
+  2. [5 min]  Go/No-Go — I'll score your idea on 6 factors and give you
+     a honest recommendation. WHY: better to pivot now than after 3 weeks
+     of building the wrong thing.
+
+  3. [15 min] Plan — I'll write your PRD (product requirements) and
+     recommend a tech stack. WHY: the PRD becomes Claude's instruction
+     manual for building your app. A good PRD = Claude builds what you
+     actually want.
+
+  4. [you]    Build — You build features, I advise on decisions.
+
+  5. [10 min] Productize — Intelligence Hub (market data, pricing,
+     competitive analysis) + production infrastructure.
+
+  6. [10 min] Launch — Deploy to your hosting provider.
 
   Ready? Let's start with discovery.
 ```
 
 **When user confirms, run the Discovery Interview:**
 
-1. Ask these questions (one at a time, conversationally — don't dump all at once):
+Explain each question briefly so the user understands what you're looking for and why. Ask one at a time, conversationally — don't dump all at once.
+
+1. **Core questions:**
    - "What are you building? Describe it in 1-2 sentences."
    - "Who specifically has this problem? (Be specific — not 'everyone')"
    - "How do they solve it today? What's broken about that?"
@@ -83,13 +99,39 @@ You're starting from scratch. Here's the PM approach:
    - "How did you discover this problem? (Lived experience? Observation? Data?)"
    - "How would this make money? (Subscription, freemium, usage-based, ads, other?)"
 
-2. After the interview (2-3 rounds of conversation), run web research:
+2. **Clarifying questions (ask based on answers above):**
+   - "Is this a public app for many users, or a private/internal tool for you or a small team?" — *helps determine architecture, auth, and scale*
+   - "Will AI generate content/output, or is AI just assisting you?" — *determines if this is AI-enhanced or AI-first*
+   - "Any automation needs? Scheduled jobs, pipelines, background processing?" — *catches operational complexity early*
+   - "What's the content workflow? Who creates content, how does it get published?" — *surfaces production pipelines*
+
+3. After the interview (2-3 rounds), explain what happens next:
+   ```
+   Great — I have enough context. Now I'm going to do what a PM does
+   before greenlighting a project:
+
+   1. Research your market (how big is the opportunity?)
+   2. Find your competitors (who else solves this?)
+   3. Check pricing benchmarks (what do similar products charge?)
+
+   This takes a minute. I'll present what I find and you can correct anything.
+   ```
+
+   Then run web research:
    - WebSearch: `"[domain] market size TAM 2025 2026"`
    - WebSearch: `"[domain] competitors alternatives"`
    - WebSearch: `"[domain] pricing models benchmarks"`
 
-3. Present a Go/No-Go scorecard:
+4. Present research with context, then the Go/No-Go scorecard:
    ```
+   Here's what I found. A PM uses this data to decide: should we build this?
+
+   MARKET: [summary — is it big enough?]
+   COMPETITORS: [summary — is there room?]
+   PRICING: [summary — can we charge?]
+
+   Now let me score your idea:
+
    | Factor            | Score | Notes                           |
    |-------------------|-------|---------------------------------|
    | Problem clarity   | X/10  | [evidence from interview]       |
@@ -99,14 +141,27 @@ You're starting from scratch. Here's the PM approach:
    | Feasibility       | X/10  | [stack estimate]                |
    | Business model    | X/10  | [from interview + benchmarks]   |
    | **Overall**       | **X/10** | **GO / NO-GO / PIVOT**       |
+
+   What this means: [explain the score — what's strong, what's risky,
+   what the user should watch out for]
    ```
 
-4. **GATE:** User must say GO before proceeding to planning.
+5. **GATE:** User must say GO before proceeding to planning.
    - If GO → save discovery to `docs/toolkit/discovery.md`, proceed to PRD creation
    - If NO-GO → help user pivot or refine, loop back to interview
    - If PIVOT → adjust the idea, re-research
 
-5. Create PRD pre-filled from discovery research (not a blank template), save to `docs/PRD.md`
+6. Before generating the PRD, explain what it is:
+   ```
+   Now I'll create your PRD (Product Requirements Document). This is the
+   single most important doc for your project — it tells Claude exactly
+   what to build, for whom, and what NOT to build.
+
+   I'm pre-filling it from our research, not giving you a blank template.
+   Review it, and we'll iterate until it's right.
+   ```
+
+   Create PRD pre-filled from discovery research, save to `docs/PRD.md`
 
 **State B: Has idea/PRD but no code**
 ```
