@@ -58,33 +58,20 @@ Based on assessment, classify and recommend:
 
 **State A: Fresh idea (no code, no docs)**
 
-Present the plan with context on WHY each step matters, then start:
+Present the plan — brief, action-oriented. Show the user what's about to happen without lecturing:
 
 ```
-You're starting from scratch. I'll walk you through the same process
-a product manager uses before any code gets written. Here's the plan:
+Before we write any code, I'll research whether this idea holds up.
+Here's the process:
 
-  1. [15 min] Discovery — I'll interview you about the idea, then research
-     the market. WHY: most apps fail because they solve a problem nobody
-     has, or solve it worse than existing options. Research first.
+  1. Discovery  — I'll ask you ~10 questions, then research the market
+  2. Go/No-Go   — I'll score the idea honestly. You decide if we proceed.
+  3. Plan        — PRD + architecture + project scaffold
+  4. Build       — You build, I advise
+  5. Productize  — Market intelligence + production infrastructure
+  6. Launch      — Deploy to your hosting provider
 
-  2. [5 min]  Go/No-Go — I'll score your idea on 6 factors and give you
-     a honest recommendation. WHY: better to pivot now than after 3 weeks
-     of building the wrong thing.
-
-  3. [15 min] Plan — I'll write your PRD (product requirements) and
-     recommend a tech stack. WHY: the PRD becomes Claude's instruction
-     manual for building your app. A good PRD = Claude builds what you
-     actually want.
-
-  4. [you]    Build — You build features, I advise on decisions.
-
-  5. [10 min] Productize — Intelligence Hub (market data, pricing,
-     competitive analysis) + production infrastructure.
-
-  6. [10 min] Launch — Deploy to your hosting provider.
-
-  Ready? Let's start with discovery.
+Let's start. Tell me about your idea.
 ```
 
 **When user confirms, run the Discovery Interview:**
@@ -110,11 +97,8 @@ Explain each question briefly so the user understands what you're looking for an
    Great — I have enough context. Now I'm going to do what a PM does
    before greenlighting a project:
 
-   1. Research your market (how big is the opportunity?)
-   2. Find your competitors (who else solves this?)
-   3. Check pricing benchmarks (what do similar products charge?)
-
-   This takes a minute. I'll present what I find and you can correct anything.
+   Checking market size, competitors, and pricing benchmarks.
+   I'll show you what I find — correct anything that's off.
    ```
 
    Then run web research:
@@ -122,15 +106,13 @@ Explain each question briefly so the user understands what you're looking for an
    - WebSearch: `"[domain] competitors alternatives"`
    - WebSearch: `"[domain] pricing models benchmarks"`
 
-4. Present research with context, then the Go/No-Go scorecard:
+4. Present research as findings (narrate, don't teach), then the Go/No-Go:
    ```
-   Here's what I found. A PM uses this data to decide: should we build this?
+   MARKET: [summary + number + source]
+   COMPETITORS: [table — name, pricing, strength, weakness]
+   PRICING: [benchmarks from similar products]
 
-   MARKET: [summary — is it big enough?]
-   COMPETITORS: [summary — is there room?]
-   PRICING: [summary — can we charge?]
-
-   Now let me score your idea:
+   Based on this, here's how your idea scores:
 
    | Factor            | Score | Notes                           |
    |-------------------|-------|---------------------------------|
@@ -142,26 +124,25 @@ Explain each question briefly so the user understands what you're looking for an
    | Business model    | X/10  | [from interview + benchmarks]   |
    | **Overall**       | **X/10** | **GO / NO-GO / PIVOT**       |
 
-   What this means: [explain the score — what's strong, what's risky,
-   what the user should watch out for]
+   [1-2 sentences: what's strong, what to watch out for]
    ```
+
+   **Tone:** You're a peer sharing findings, not a professor grading homework.
+   State facts, flag risks, recommend — then let the user decide.
 
 5. **GATE:** User must say GO before proceeding to planning.
    - If GO → save discovery to `docs/toolkit/discovery.md`, proceed to PRD creation
    - If NO-GO → help user pivot or refine, loop back to interview
    - If PIVOT → adjust the idea, re-research
 
-6. Before generating the PRD, explain what it is:
+6. Generate PRD pre-filled from discovery research. Brief intro:
    ```
-   Now I'll create your PRD (Product Requirements Document). This is the
-   single most important doc for your project — it tells Claude exactly
-   what to build, for whom, and what NOT to build.
-
-   I'm pre-filling it from our research, not giving you a blank template.
-   Review it, and we'll iterate until it's right.
+   Here's your PRD — pre-filled from our research.
+   This is what Claude reads to know what to build. Review it and
+   let me know what to change.
    ```
 
-   Create PRD pre-filled from discovery research, save to `docs/PRD.md`
+   Save to `docs/PRD.md`
 
 **State B: Has idea/PRD but no code**
 ```
