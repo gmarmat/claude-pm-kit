@@ -185,6 +185,40 @@ Explain each question briefly so the user understands what you're looking for an
    | Multi-tenant data isolation | V2 (if multi-user) | RLS policies |
    ```
 
+   **Security & Guardrails Section** (auto-generated based on app type):
+   ```
+   ## Security & Guardrails
+
+   Auto-assessed based on your app's characteristics:
+
+   | Risk Area | Applies? | Guardrail | Phase |
+   |-----------|:--------:|-----------|-------|
+   | User data (PII) | [Yes if auth] | Encrypt at rest, hash passwords, GDPR-ready delete | MVP |
+   | API security | [Yes if has API] | Rate limiting, input validation (Zod), parameterized queries | MVP |
+   | Multi-user access | [Yes if >1 user] | RLS on all tables, tenant isolation | MVP |
+   | File uploads | [Yes if uploads] | Scan for malware, limit file size, restrict types | MVP |
+   | Payment data | [Yes if payments] | PCI compliance, never store raw card numbers, use Stripe/provider | MVP |
+   | Admin actions | [Yes if has admin] | RBAC, audit log for admin actions, confirm destructive ops | MVP |
+   | Third-party APIs | [Yes if integrations] | Store tokens encrypted, handle API failures gracefully | MVP |
+   | Public-facing pages | [Yes if public] | XSS prevention, CSP headers, no sensitive data in HTML source | MVP |
+   | Kids/minors data | [Yes if applicable] | COPPA compliance, minimal data collection | MVP |
+   | Secrets management | Always | .env for secrets, never commit, .gitignore covers all env files | Day 1 |
+
+   ALWAYS:
+   - Validate all input at API boundaries
+   - Use parameterized queries (never concatenate SQL)
+   - Return generic errors to clients (log details server-side)
+   - Include .gitignore with .env coverage from first commit
+
+   NEVER:
+   - Store passwords in plain text
+   - Log sensitive data (tokens, passwords, PII)
+   - Trust client-side validation alone
+   - Expose stack traces or internal paths in error responses
+   ```
+
+   pmtwin determines which rows apply based on the interview and PRD scope — the user doesn't have to think about this.
+
    **Competitive Feature Parity Section:**
    ```
    ## Feature Parity Roadmap

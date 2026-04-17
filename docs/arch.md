@@ -66,27 +66,36 @@ claude-pm-kit/
 
 | Skill | Phase | Input | Output | Status |
 |-------|-------|-------|--------|--------|
-| `/pm setup` | 0-1 | User's idea or existing project | Assessment + gap-fill plan | Planned |
-| `/pm status` | Any | Project state | Maturity scorecard | Planned |
-| `/pm next` | Any | Project state | Single highest-impact action | Planned |
-| `/toolkit research` | 0, 3 | PRD + arch.md + web research | Intelligence Hub HTML | Planned |
-| `/toolkit features` | 3 | arch.md + tier selection | Routes, components, migrations OR specs | Planned |
-| `/roadmap` | 1, 5 | PRD phases + feature index | Visual roadmap | Planned |
-| `/pitch` | 5 | Intelligence Hub data | Pitch deck outline + speaker notes | Planned |
-| `/metrics` | 5 | PRD + monitoring data | KPI definitions + report | Planned |
-| `/stakeholder-update` | 5 | Git history + arch.md | Status report (markdown or HTML) | Planned |
-| `/userstudy` | 5 | PRD | Research plan + interview script | Planned |
+| `/pm setup` | 0-1 | User's idea or existing project | Discovery, complexity assessment, feature parity, recommendation, PRD, journey flows | Built |
+| `/pm status` | Any | Project state | Maturity scorecard | Built |
+| `/pm next` | Any | Project state | Single highest-impact action | Built |
+| `/toolkit research` | 3 | PRD + arch.md + web research | Intelligence Hub HTML (7-tab dashboard) | Built |
+| `/toolkit features` | 2-3 | arch.md + tier selection | Production infrastructure (T1/T2/T3) | Built |
+| `/toolkit hero` | 3 | PRD + discovery + journey flows | Public-facing landing/hero page | Built |
+| `/toolkit help` | 3 | Journey flows + PRD features | In-app help section + onboarding wizard spec | Built |
+| `/toolkit sales` | 3 | Intelligence Hub + PRD | One-pager, objection handlers, pitches, battle cards | Built |
+| `/roadmap` | 1, 5 | PRD phases + feature index | Visual roadmap | Built |
+| `/pitch` | 5 | Intelligence Hub data | Pitch deck outline + speaker notes | Built |
+| `/metrics` | 5 | PRD + monitoring data | KPI definitions + report | Built |
+| `/stakeholder-update` | 5 | Git history + arch.md | Status report (markdown or HTML) | Built |
+| `/userstudy` | 5 | PRD | Research plan + interview script | Built |
 
 ---
 
 ## Key Patterns
 
 1. **Research-first** — Every skill that makes recommendations does web research first, cites sources
-2. **Gate-driven** — Phase 0 has an explicit Go/No-Go. Phase 1 has roadmap confirmation. No skipping.
-3. **Standalone output** — HTML Intelligence Hub works offline, no server needed
+2. **Gate-driven** — Phase 0 has Go/No-Go, Phase 1 has journey flow review. No skipping.
+3. **Standalone output** — HTML pages (Intelligence Hub, hero) work offline, no server needed
 4. **Kit delegation** — PM Twin checks for other kits, delegates when available, works alone when not
 5. **Confidence tagging** — Every data point tagged: Verified, Estimated, Calculated, User-Provided
 6. **`[PM Twin]` prefix** — All skill descriptions start with `[PM Twin]` for disambiguation
+7. **Peer narration** — Show thinking by narrating, never lecture or teach frameworks
+8. **Standard features auto-included** — Auth, RBAC, audit, dark mode, search in every PRD
+9. **Feature parity assessment** — Competitive table (our MVP vs competitor A vs B) in every PRD
+10. **Journey flows before code** — User reviews onboarding + core action flows before building starts
+11. **Full artifact suite** — Discovery → PRD → flows → code → hero → help → sales toolkit
+12. **User is CEO** — pmtwin is the entire product team (PM + eng + design + marketing + sales enablement)
 7. **Peer narration tone** — PM Twin narrates its work ("Checking competitors...") rather than teaching PM theory. User absorbs product thinking by watching, not being lectured.
 
 ---
