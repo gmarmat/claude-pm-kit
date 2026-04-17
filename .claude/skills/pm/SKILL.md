@@ -157,11 +157,64 @@ Explain each question briefly so the user understands what you're looking for an
 
    Score 4-6 factors /10 to back up the recommendation.
 
-   After every scorecard: *"Before building, consider talking to [N] [target users] about [specific question]."*
+   **D. Executive Decision Summary** — present this as the final view before the gate.
+   This is what a VP of Product would put in front of the C-suite:
+
+   ```
+   ┌─ EXECUTIVE DECISION SUMMARY ─────────────────────────────────┐
+   │                                                               │
+   │  [Product Name]                                               │
+   │  [1-line description]                                         │
+   │                                                               │
+   │  OPPORTUNITY                                                  │
+   │  Market: [size + growth + source]                             │
+   │  Target: [who, how many]                                      │
+   │  Problem: [1 sentence — what's broken today]                  │
+   │                                                               │
+   │  COMPETITIVE LANDSCAPE                                        │
+   │  | Competitor | Price | Strength | Gap We Fill |              │
+   │  |------------|-------|----------|-------------|              │
+   │  | [Name]     | $X/mo | [what]   | [our edge]  |             │
+   │  | [Name]     | $Y/mo | [what]   | [our edge]  |             │
+   │                                                               │
+   │  COSTS (our side)                                             │
+   │  Build: [X weeks with Claude/pmtwin]                          │
+   │  Infra: [$X/month — breakdown]                                │
+   │  Maintenance: [estimated hours/month]                         │
+   │                                                               │
+   │  REVENUE POTENTIAL (if commercial)                            │
+   │  Pricing: [$X/user/month — based on competitor benchmarks]    │
+   │  Break-even: [N paying users]                                 │
+   │  Year 1 target: [$X ARR at N users]                           │
+   │                                                               │
+   │  (if internal tool)                                           │
+   │  Cost saved: [$X/year vs buying competitor]                   │
+   │  ROI: [payback in N months]                                   │
+   │                                                               │
+   │  FEATURE PARITY                                               │
+   │  MVP: [N features] — [X weeks]                                │
+   │  Competitive: [N additional features] — [X more weeks]        │
+   │  Differentiator: [what no competitor does]                    │
+   │                                                               │
+   │  RISKS                                                        │
+   │  1. [Top risk + mitigation]                                   │
+   │  2. [Second risk + mitigation]                                │
+   │                                                               │
+   │  RECOMMENDATION                                               │
+   │  [GO / NO-GO / PIVOT] — [1 sentence why]                     │
+   │  Best path: [local / team / compete]                          │
+   │                                                               │
+   │  SCORE: [X/10]                                                │
+   └───────────────────────────────────────────────────────────────┘
+   ```
+
+   This summary gets saved to `docs/toolkit/executive-summary.md` — reusable for stakeholder presentations, investor pitches, or internal decision documents.
+
+   After the summary: *"Before building, consider talking to [N] [target users] about [specific question]."*
 
    **Data quality rules:** No vague data. Tag everything [Verified]/[Estimated]/[Unsourced]. Show SAM/SOM math. Cross-reference disagreements.
 
-6. **GATE:** User says GO → save to `docs/toolkit/discovery.md`, proceed to PRD.
+6. **GATE:** User says GO → save discovery + executive summary to `docs/toolkit/`, proceed to PRD.
    NO-GO → pivot/refine. PIVOT → re-research.
 
 7. Generate PRD pre-filled from research. The PRD MUST include these sections beyond the standard template:
