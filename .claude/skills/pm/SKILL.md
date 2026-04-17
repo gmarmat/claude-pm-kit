@@ -210,6 +210,50 @@ Explain each question briefly so the user understands what you're looking for an
 
    Save to `docs/PRD.md`.
 
+8. **After PRD, generate User Journey Flows.** Present as code diagrams BEFORE building.
+
+   Generate 3 flows and present to the user for feedback:
+
+   **Flow 1: New User Onboarding**
+   ```
+   First Visit → Login/Signup → Initial Setup Wizard
+       → [Configure: org, team, integrations]
+       → Dashboard (empty state with guided actions)
+       → First [core action]
+       → "You're set up!"
+   ```
+
+   **Flow 2: Core Action #1** (the main thing the app does — identified from interview)
+   ```
+   [Map out the primary workflow step by step]
+   [Include: entry point → decision points → actions → outcome]
+   [Show what the user sees at each step]
+   ```
+
+   **Flow 3: Core Action #2** (the second most important workflow)
+   ```
+   [Same pattern]
+   ```
+
+   Present these to the user and ask:
+   ```
+   These are the key user journeys I'll build around. Before I start:
+
+   1. Does the onboarding flow match how you'd want new users to start?
+   2. For [Core Action #1] — walk me through how you do this TODAY
+      without this app. What's painful? What steps would you skip?
+   3. For [Core Action #2] — same question. What's the ideal flow?
+   4. Any flow I'm missing that's critical?
+
+   Your domain knowledge here is gold — you know these workflows
+   better than any research can tell me.
+   ```
+
+   **GATE:** Wait for user feedback. Revise flows. THEN proceed to architecture.
+   This is where the user's expertise meets pmtwin's structure.
+
+   Save flows to `docs/toolkit/journey-flows.md`.
+
 **State B: Has idea/PRD but no code**
 ```
 You have a product definition. Let me check what's missing:
