@@ -116,11 +116,46 @@ Explain each question briefly so the user understands what you're looking for an
    | Open source | open source alternatives, github stars | What exists, where's the gap, adoption potential |
    | Internal | enterprise SaaS comparison | Build vs buy cost, integration points |
 
-5. Present findings + Go/No-Go scorecard. Score 4-6 factors /10 based on intent:
+5. **After research, present THREE things:**
 
-   - **Commercial:** Problem clarity, Market size, Competition, Differentiation, Feasibility, Business model → GO / NO-GO / PIVOT
-   - **Personal:** Problem clarity, Existing tools, Feasibility, Cost to run → GO / USE EXISTING / SIMPLIFY
-   - **OSS/Internal:** Adapt factors to fit. Always score honestly.
+   **A. Complexity Assessment:**
+   ```
+   Complexity: [Simple / Moderate / Complex]
+   Reasoning: [1-2 sentences — what makes it this level]
+   ```
+
+   **B. Competitive Feature Parity Table:**
+   Show what competitors have vs what you'll need. ALWAYS include standard features.
+
+   | Feature | Standard? | Competitor A | Competitor B | Your MVP | Your V2 |
+   |---------|:---------:|:------------:|:------------:|:--------:|:-------:|
+   | Auth (login/SSO) | Yes | Yes | Yes | Must have | — |
+   | RBAC (roles) | Yes | Yes | Yes | Must have | — |
+   | Audit logging | Yes | Yes | Yes | Must have | — |
+   | Dark mode + responsive | Yes | No | Yes | Must have | — |
+   | Search + filtering | Yes | Yes | Yes | Must have | — |
+   | Data export (CSV) | Yes | Yes | Yes | Should have | — |
+   | [Domain feature 1] | No | Yes | No | Must have | — |
+   | [Domain feature 2] | No | Yes | Yes | — | Should have |
+
+   Standard features (include in EVERY PRD regardless of idea):
+   - Authentication, Authorization/RBAC, Audit logging
+   - Settings/preferences, Error handling, Loading states
+   - Dark mode, Responsive layout, Search + filtering
+   - Data export (CSV minimum), Multi-tenant isolation (if multi-user)
+
+   **C. Finalized Recommendation** (not just Go/No-Go — a nuanced assessment):
+   ```
+   LOCAL USE:       [Great / Good / Overkill] — [why]
+   SMALL TEAM:      [Viable with: auth + basic RBAC] or [Too complex for small team]
+   MARKET COMPETE:  [Feasible / Hard / Unrealistic] — [reasons]
+                    To reach competitive parity you'd need: [feature list]
+                    Your differentiator would be: [what]
+   
+   RECOMMENDATION:  [Build for local use / Build for team / Build to compete / Use existing tool X]
+   ```
+
+   Score 4-6 factors /10 to back up the recommendation.
 
    After every scorecard: *"Before building, consider talking to [N] [target users] about [specific question]."*
 
@@ -129,7 +164,51 @@ Explain each question briefly so the user understands what you're looking for an
 6. **GATE:** User says GO → save to `docs/toolkit/discovery.md`, proceed to PRD.
    NO-GO → pivot/refine. PIVOT → re-research.
 
-7. Generate PRD pre-filled from research (not blank template). Save to `docs/PRD.md`.
+7. Generate PRD pre-filled from research. The PRD MUST include these sections beyond the standard template:
+
+   **Standard Features Section** (auto-included in every PRD):
+   ```
+   ## Standard Features (Required for Any App)
+   
+   These are non-negotiable regardless of your idea. Included by default.
+   
+   | Feature | Phase | Notes |
+   |---------|-------|-------|
+   | Authentication (login/signup) | MVP | Supabase Auth or equivalent |
+   | Authorization (RBAC — admin/user minimum) | MVP | Middleware + DB roles |
+   | Audit logging (who changed what when) | MVP | audit_log table |
+   | Settings/preferences page | MVP | user_settings table |
+   | Dark mode + responsive layout | MVP | Tailwind dark: classes from day 1 |
+   | Error handling + loading states | MVP | Global error boundary + skeletons |
+   | Search + filtering on list views | MVP | Client-side for <1K items |
+   | Data export (CSV) | V2 | Export button on tables |
+   | Multi-tenant data isolation | V2 (if multi-user) | RLS policies |
+   ```
+
+   **Competitive Feature Parity Section:**
+   ```
+   ## Feature Parity Roadmap
+   
+   | Tier | Features | When |
+   |------|----------|------|
+   | Bare Minimum | [standard features above] | MVP |
+   | Competitive MVP | [features competitors have that users expect] | V1 |
+   | Competitive Parity | [full match with top competitor] | V2 |
+   | Differentiator | [what makes yours unique — the reason to switch] | V1+ |
+   ```
+
+   **Design System Section:**
+   ```
+   ## Design System
+   
+   [If project-kit design system adopted]: Use --ext-* tokens from design/globals.css.
+   All components follow the 3-layer token architecture. Dark mode via data-theme attribute.
+   
+   [If not adopted]: Use CSS custom properties for all colors. Include dark mode from day 1.
+   Never hardcode colors. Use Tailwind dark: classes on every element.
+   ```
+
+   Save to `docs/PRD.md`.
 
 **State B: Has idea/PRD but no code**
 ```
