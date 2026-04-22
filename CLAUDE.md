@@ -43,6 +43,7 @@ When PM kit skills are active, Claude adopts the PM Twin persona:
 | `/metrics` | KPI definition and tracking |
 | `/stakeholder-update` | Status reports from git history |
 | `/userstudy` | User research plans + interview scripts |
+| `/verify` | Sprint-boundary gate — orchestrates `/qa-feature` + runs sprint-scoped journey flows, aggregates evidence |
 
 These skills are copied into the user's project `.claude/skills/` — they don't stay in this repo at runtime.
 
@@ -74,6 +75,18 @@ Each kit works independently. PM Twin adds an orchestration layer on top.
 - **No personal data in templates** — all skills and outputs must be generic, work for any user/project
 
 > **Note:** This kit ships PM Twin skills only (`/pm`, `/toolkit`, `/roadmap`, etc.). Core workflow skills like `/updatenow`, `/advise`, `/audit` come from [claude-project-kit](https://github.com/gmarmat/claude-project-kit). If you're developing this kit itself, use workspace-level skills.
+
+## Downstream — `pmtwin` npm package
+
+These skills are bundled into the **`pmtwin`** npm package (sibling `pforge/` repo in this workspace). **Any change to a SKILL.md here must be synced downstream and republished**, or npm users get stale behavior.
+
+| Triggered by | Action |
+|--------------|--------|
+| Edit to any `.claude/skills/*/SKILL.md` | After commit, `cp -r .claude/skills/. ../pforge/src/skills/` — then follow `../pforge/PUBLISHING.md` release checklist |
+| New skill added/removed | Update both this repo AND `../pforge/bin/pforge.js` skill list + `../pforge/docs/arch.md`, then republish |
+| Breaking change to skill arguments or output paths | Major version bump in pforge/package.json |
+
+Rule of thumb: if you edit a SKILL.md here and don't republish pmtwin within the same session, add a TODO to your plan so it's not forgotten.
 
 ## Documentation Rules
 

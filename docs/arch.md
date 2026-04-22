@@ -28,14 +28,16 @@ A Claude Code skill kit that acts as a digital PM twin — guiding builders thro
 claude-pm-kit/
 ├── CLAUDE.md                              # PM Twin persona + rules
 ├── README.md                              # Public docs
-├── .claude/skills/                        # The 7 PM Twin skills
-│   ├── pm/SKILL.md                        # Orchestrator: setup, status, next
+├── .claude/skills/                        # PM Twin skills
+│   ├── pm/SKILL.md                        # Orchestrator: setup, status, next (includes Sprint Plan step)
 │   ├── toolkit/SKILL.md                   # Intelligence Hub + Feature Tiers
 │   ├── roadmap/SKILL.md                   # Product roadmap
 │   ├── pitch/SKILL.md                     # Pitch materials
 │   ├── metrics/SKILL.md                   # KPI definition + tracking
 │   ├── stakeholder-update/SKILL.md        # Status reports
-│   └── userstudy/SKILL.md                # User research plans
+│   ├── userstudy/SKILL.md                 # User research plans
+│   ├── qa-feature/SKILL.md                # Per-feature Playwright + self-heal
+│   └── verify/SKILL.md                    # Sprint-boundary gate — orchestrates qa-feature + integration flows
 ├── docs/
 │   ├── arch.md                            # This file
 │   ├── PRD.md                             # Product requirements
@@ -79,6 +81,8 @@ claude-pm-kit/
 | `/metrics` | 5 | PRD + monitoring data | KPI definitions + report | Built |
 | `/stakeholder-update` | 5 | Git history + arch.md | Status report (markdown or HTML) | Built |
 | `/userstudy` | 5 | PRD | Research plan + interview script | Built |
+| `/qa-feature` | 2 | Feature + journey flow | Playwright test, screenshots, self-heal 3x, per-feature QA report | Built |
+| `/verify` | 2 | Sprint scope from sprint-plan.md | Sprint-boundary gate — per-feature QA + sprint integration run + aggregated evidence report | Draft |
 
 ---
 
