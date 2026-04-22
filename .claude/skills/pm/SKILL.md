@@ -39,18 +39,86 @@ Check for these artifacts (don't fail if missing — that's the point):
 | `.git` | Exists? Recent commits? | Version control active |
 | `docs/features/` | How many feature docs? | Features documented |
 
-### Step 2: Check for Other Kits
+### Step 2: Check for Other Kits (detect + optionally auto-fetch)
 
-Look for other Claude kits in these locations (in order):
+pm-kit orchestrates three other kits. Detect whether they're available locally, and **offer to auto-clone public kits** that are missing so the user doesn't have to pre-wire the ecosystem.
+
+#### Detection order (per kit)
+
 1. Sibling directories (e.g., `../kit/`, `../claude-project-kit/`)
 2. Parent workspace (e.g., `../../kit/`)
 3. `~/.claude/kits/` (global cache)
 
-| Kit | What to Look For | If Found |
-|-----|-----------------|----------|
-| project-kit | `StartHere.md` + `.claude/skills/startnow/` | Use for scaffolding |
-| workspace-kit | Workspace-level `.claude/skills/newproject/` | Use for organization |
-| rehab | `.claude/skills/diagnose/` | Use for health checks on existing code |
+#### Kit availability matrix
+
+| Kit | GitHub URL | Visibility | Detect by | Role | If missing |
+|-----|-----------|:----------:|-----------|------|------------|
+| project-kit | `github.com/gmarmat/claude-project-kit` | public | `StartHere.md` + `.claude/skills/startnow/` | Scaffolding + core workflow skills (`/startnow`, `/updatenow`, `/advise`, `/newproject`) | **Offer to auto-clone** |
+| workspace-kit | `github.com/gmarmat/claude-workspace-kit` | private | `.claude/skills/newproject/` in a workspace root | Multi-project workspace setup | Flag only — user must clone with their own auth |
+| rehab | `github.com/gmarmat/claude-project-rehab` | private | `.claude/skills/diagnose/` | Health checks for existing projects | Flag only — user must clone with their own auth |
+
+#### Auto-fetch protocol (public kits only)
+
+When `/pm setup` detects that a public kit is missing **and** the upcoming phase will use it (e.g., State A fresh-idea flow needs project-kit for scaffolding):
+
+1. **Ask the user once, with context:**
+
+   ```
+   I use project-kit's scaffolding skills (/startnow, /updatenow, /advise, /newproject)
+   when it's time to wire up your project. It's not on this machine yet.
+
+   Clone it from github.com/gmarmat/claude-project-kit into ~/.claude/kits/? (y/n)
+   ```
+
+2. **On "y": clone into the global cache** via Bash:
+
+   ```bash
+   mkdir -p ~/.claude/kits
+   git clone --depth 1 https://github.com/gmarmat/claude-project-kit.git ~/.claude/kits/claude-project-kit
+   ```
+
+3. **Copy the needed skills into the user's current project** (don't overwrite if a skill of the same name already exists — respect user customizations):
+
+   ```bash
+   mkdir -p ./.claude/skills
+   for skill in startnow updatenow advise newproject; do
+     if [ ! -d ./.claude/skills/$skill ] && [ -d ~/.claude/kits/claude-project-kit/.claude/skills/$skill ]; then
+       cp -r ~/.claude/kits/claude-project-kit/.claude/skills/$skill ./.claude/skills/
+     fi
+   done
+   ```
+
+4. **On "n": proceed without it.** Tell the user:
+
+   ```
+   No problem — I'll scaffold directly from pm-kit templates. If you want /startnow,
+   /updatenow, /advise later, you can run this any time:
+
+     git clone https://github.com/gmarmat/claude-project-kit.git ~/.claude/kits/claude-project-kit
+   ```
+
+#### For private kits (workspace-kit, rehab)
+
+If pm-kit would benefit from one of these, **flag it, don't auto-clone**:
+
+```
+Note: workspace-kit (private) isn't on this machine. If you have access, clone with:
+  git clone git@github.com:gmarmat/claude-workspace-kit.git ~/.claude/kits/claude-workspace-kit
+Then re-run /pm setup and I'll use it for multi-project organization.
+```
+
+**Never attempt to clone a private kit automatically** — let the user handle auth themselves.
+
+#### Caching behavior
+
+- Kits cloned to `~/.claude/kits/` persist across sessions and projects. pm-kit checks this location first on future runs.
+- To update a cached kit: `git -C ~/.claude/kits/<kit-name> pull`
+- pm-kit should check the age of a cached kit with `git -C <path> log -1 --format=%cr` and suggest `git pull` if > 30 days old, but never pull silently.
+
+#### When to invoke this protocol
+
+- **State A (fresh idea):** Run the auto-fetch check at Step 2 — project-kit will be needed for scaffolding later.
+- **State B (partial project) / State C (mature):** Only offer to fetch if a specific step actually needs the missing kit. Don't pollute the session with unused clones.
 
 ### Step 3: Classify State and Present Plan
 
