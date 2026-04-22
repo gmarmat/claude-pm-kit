@@ -1,6 +1,6 @@
 # Claude PM Kit — Architecture
 
-**Version:** 0.4 | **Updated:** 2026-04-15
+**Version:** 0.5 | **Updated:** 2026-04-22
 
 > **LLM Instructions:** Token-optimized project index. Tables over prose, self-contained sections.
 
@@ -127,3 +127,4 @@ claude-pm-kit/
 | 0.2 | 2026-04-15 | **QA + e2e hardening.** Fixed 3 blockers. Discovery: 4 new questions, peer narration tone. E2e trial vs DharmaLink: 7.5/10. |
 | 0.3 | 2026-04-15 | **Security + token optimization.** ALWAYS/ASK/NEVER constraints, code gen security, intent branching, pm 290→205 lines. |
 | 0.4 | 2026-04-15 | **Phase 2 hardening.** All 5 Phase 2 skills (roadmap, pitch, metrics, stakeholder-update, userstudy) hardened with prereq checks, safety rules, write-path constraints, existing-file-first patterns. QA grade: A (92%). |
+| 0.5 | 2026-04-22 | **Auto-fetch + sprint gate.** `/pm` Step 2 now detects missing public kits and offers to clone project-kit into `~/.claude/kits/` on demand — one-clone install for new users. `/verify` sprint-boundary gate skill added, sprint planning step added to `/pm`. Skill count 9 → 10. Enables Greg-style internal pilots where cloning pm-kit alone bootstraps the full ecosystem. |
